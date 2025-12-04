@@ -2,7 +2,6 @@ import threading
 import time
 import math
 from commis import Commis
-from ingredient import Ingredient
 
 
 class BatteurOeufs(Commis, threading.Thread):
@@ -39,20 +38,11 @@ class FondeurChocolat(Commis, threading.Thread):
             print(f"Je mélange {self.quantite} de chocolat à fondre, tour n°{no_tour}")
             time.sleep(1)  # temps supposé d'un tour de spatule
 
-class Oeuf(Ingredient):
-    def __init__(self, nom, quantite, unite):
-        super().__init__(nom, quantite, unite)
-
-
-class Chocolat(Ingredient):
-    def __init__(self, nom, quantity, unite):
-        super().__init__(nom, quantity, unite)
-
-
 
 if __name__ == "__main__":
-    batteur = BatteurOeufs(6)
-    fondeur = FondeurChocolat(200)
+    batteur = BatteurOeufs(6, "Paul")
+    fondeur = FondeurChocolat(200, "Alain")
+    fondeur2 = FondeurChocolat(300, "Georges")
     batteur.start()
     fondeur.start()
     batteur.join()
