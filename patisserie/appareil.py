@@ -1,6 +1,6 @@
-
 from oeuf import Oeuf
 from chocolat import Chocolat
+
 
 class Appareil(Oeuf, Chocolat):
     def __init__(self, quantite_oeuf: float, quantite_chocolat: float, unite: str):
