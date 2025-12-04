@@ -2,6 +2,7 @@ import threading
 import time
 import math
 from commis import Commis
+from recipient import Recipient
 
 
 class BatteurOeufs(Commis, threading.Thread):
@@ -37,6 +38,22 @@ class FondeurChocolat(Commis, threading.Thread):
         for no_tour in range(1, nb_tours + 1):
             print(f"Je mélange {self.quantite} de chocolat à fondre, tour n°{no_tour}")
             time.sleep(1)  # temps supposé d'un tour de spatule
+
+
+class Verseur(Commis, threading.Thread):
+    def __init__(self, recipient1: Recipient, recipient2: Recipient, nom):
+        Commis.__init__(self, nom)
+        threading.Thread.__init__(self)
+        self.recipient1 = recipient1.contenu
+        self.recipient2 = recipient2.contenu
+
+    def run(self):
+        print("Je prends le premier récipient")
+        time.sleep(2)
+        print("Je verse dans le deuxième récipient")
+        time.sleep(5)
+        contenu_final = self.recipient1.quantite + self.recipient2.quantite
+        print(f"Le deuxième récipient contient {contenu_final}{self.recipient2.unite} d'ingrédients")
 
 
 if __name__ == "__main__":
